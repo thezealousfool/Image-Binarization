@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/vivek/workspace/OpenCV/Binarization/kmeans.cpp
+/home/vivek/Projects/Binarization/kmeans.cpp
 iostream
 -
 opencv2/core.hpp

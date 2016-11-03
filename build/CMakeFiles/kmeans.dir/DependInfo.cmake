@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vivek/workspace/OpenCV/Binarization/kmeans.cpp" "/home/vivek/workspace/OpenCV/Binarization/build/CMakeFiles/kmeans.dir/kmeans.cpp.o"
+  "/home/vivek/Projects/Binarization/kmeans.cpp" "/home/vivek/Projects/Binarization/build/CMakeFiles/kmeans.dir/kmeans.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
