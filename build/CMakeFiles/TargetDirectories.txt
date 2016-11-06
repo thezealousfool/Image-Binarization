@@ -1,3 +1,4 @@
 /home/vivek/Projects/Binarization/build/CMakeFiles/edit_cache.dir
 /home/vivek/Projects/Binarization/build/CMakeFiles/rebuild_cache.dir
+/home/vivek/Projects/Binarization/build/CMakeFiles/kmeans_hue_value.dir
 /home/vivek/Projects/Binarization/build/CMakeFiles/kmeans.dir

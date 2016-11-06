@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named kmeans_hue_value
+
+# Build rule for target.
+kmeans_hue_value: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 kmeans_hue_value
+.PHONY : kmeans_hue_value
+
+# fast build rule for target.
+kmeans_hue_value/fast:
+	$(MAKE) -f CMakeFiles/kmeans_hue_value.dir/build.make CMakeFiles/kmeans_hue_value.dir/build
+.PHONY : kmeans_hue_value/fast
+
+#=============================================================================
 # Target rules for targets named kmeans
 
 # Build rule for target.
@@ -150,6 +163,33 @@ kmeans.cpp.s:
 	$(MAKE) -f CMakeFiles/kmeans.dir/build.make CMakeFiles/kmeans.dir/kmeans.cpp.s
 .PHONY : kmeans.cpp.s
 
+kmeans_hue_value.o: kmeans_hue_value.cpp.o
+
+.PHONY : kmeans_hue_value.o
+
+# target to build an object file
+kmeans_hue_value.cpp.o:
+	$(MAKE) -f CMakeFiles/kmeans_hue_value.dir/build.make CMakeFiles/kmeans_hue_value.dir/kmeans_hue_value.cpp.o
+.PHONY : kmeans_hue_value.cpp.o
+
+kmeans_hue_value.i: kmeans_hue_value.cpp.i
+
+.PHONY : kmeans_hue_value.i
+
+# target to preprocess a source file
+kmeans_hue_value.cpp.i:
+	$(MAKE) -f CMakeFiles/kmeans_hue_value.dir/build.make CMakeFiles/kmeans_hue_value.dir/kmeans_hue_value.cpp.i
+.PHONY : kmeans_hue_value.cpp.i
+
+kmeans_hue_value.s: kmeans_hue_value.cpp.s
+
+.PHONY : kmeans_hue_value.s
+
+# target to generate assembly for a file
+kmeans_hue_value.cpp.s:
+	$(MAKE) -f CMakeFiles/kmeans_hue_value.dir/build.make CMakeFiles/kmeans_hue_value.dir/kmeans_hue_value.cpp.s
+.PHONY : kmeans_hue_value.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... kmeans_hue_value"
 	@echo "... kmeans"
 	@echo "... kmeans.o"
 	@echo "... kmeans.i"
 	@echo "... kmeans.s"
+	@echo "... kmeans_hue_value.o"
+	@echo "... kmeans_hue_value.i"
+	@echo "... kmeans_hue_value.s"
 .PHONY : help
 
 
