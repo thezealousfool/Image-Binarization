@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 cmake_policy(SET CMP0012 NEW)
 PROJECT(project)
 
-FIND_PACKAGE( OpenCV 3.0.0 REQUIRED )
+FIND_PACKAGE( OpenCV REQUIRED )
 MESSAGE("OpenCV version : ${OpenCV_VERSION}")
 MESSAGE("OpenCV library directories: ${OpenCV_LIB_DIR}")
 MESSAGE("OpenCV include directories: ${OpenCV_INCLUDE_DIRS}")
