@@ -8,3 +8,11 @@ The OpenCV core library is used to read and write the image files. The highgui l
 2. cmake
 3. make
 4. OpenCV
+
+## Building
+```
+mkdir build
+cd build
+cmake ..
+make
+```
