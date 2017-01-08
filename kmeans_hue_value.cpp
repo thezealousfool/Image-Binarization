@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cmath>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <fstream>
 
 int main(int argc, char** argv)
 {
@@ -43,24 +45,34 @@ int main(int argc, char** argv)
 	std::vector<cv::Mat> chans;
 	cv::split(img, chans);
 	cv::normalize(chans[2], chans[2], 0, 255, cv::NORM_MINMAX);
+	cv::normalize(chans[0], chans[0], 0, 255, cv::NORM_MINMAX);
+	cv::imshow("Hue", chans[0]);
+	cv::imshow("Sat", chans[1]);
+	cv::imshow("Val", chans[2]);
 	cv::merge(chans, img);
 	
 	cv::Mat bestLabels, centers, clustered;
 	cv::Mat p(img.rows * img.cols, 1, CV_32FC2);
 
+	std::ofstream points;
+
+	points.open("Points.plot", std::ios::out);
+
 	for(long long int i = 0; i < img.rows * img.cols; ++i) {
 		cv::Vec3b color = img.at<cv::Vec3b>(cv::Point(i % img.cols, i / img.cols));
 		p.at<cv::Vec2f>(i)[0] = color[0];
 		p.at<cv::Vec2f>(i)[1] = color[2];
+		points << (int)p.at<cv::Vec2f>(i)[0] << " " << p.at<cv::Vec2f>(i)[1] << "\n";
 	}
+	points.close();
 
-	int nclusters;
-	std::cout << "Clusters: ";
-	std::cin >> nclusters;
+	int nclusters = 5;
+	// std::cout << "Clusters: ";
+	// std::cin >> nclusters;
 
 	std::vector<bool> cluster_fb(nclusters, false);
 
-	cv::kmeans(p, nclusters, bestLabels, cv::TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 4, 1.0), 2, cv::KMEANS_PP_CENTERS, centers);
+	cv::kmeans(p, nclusters, bestLabels, cv::TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 4, 1.0), 5, cv::KMEANS_PP_CENTERS, centers);
 
 	cv::Mat new_img(img.rows, img.cols, CV_8U);
 
@@ -88,6 +100,18 @@ int main(int argc, char** argv)
 			if (f_dist < b_dist)
 				cluster_fb[i] = true;
 		}
+	}
+
+	for(int plotNo = 1; plotNo <= nclusters; ++plotNo) {
+		std::string fname = "Cluster";
+		fname += (char)(plotNo + '0');
+		fname += ".plot";
+		points.open(fname.c_str(), std::ios::out);
+		for(long long int i = 0; i < img.rows * img.cols; ++i) {
+			if(cluster_fb[bestLabels.at<int>(0, i)])
+				points << (int)p.at<cv::Vec2f>(i)[0] << " " << p.at<cv::Vec2f>(i)[1] << "\n";
+		}
+		points.close();
 	}
 
 	for(long long int i = 0; i < img.rows * img.cols; ++i) {

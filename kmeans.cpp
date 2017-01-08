@@ -50,8 +50,28 @@ int main(int argc, char** argv)
 
 	cv::kmeans(p, 2, bestLabels, cv::TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 4, 1.0), 2, cv::KMEANS_PP_CENTERS, centers);
 	
-	for(long long int i = 0; i < img.rows * img.cols; ++i) {
-		img.at<char>(i/img.cols, i%img.cols) = char((bestLabels.at<int>(0, i) - 1) * -255);
+	bool zeroIsBackground = true;
+	uchar center0 = img.at<uchar>(cv::Point((int)(centers.at<float>(0, 0)) % img.cols, (int)(centers.at<float>(0, 0)) / img.cols));
+	uchar center1 = img.at<uchar>(cv::Point((int)(centers.at<float>(1, 0)) % img.cols, (int)(centers.at<float>(1, 0)) / img.cols));
+
+	if(center0 < center1)
+		zeroIsBackground = false;
+
+	for(std::size_t i = 0; i < img.rows; ++i) {
+		for(std::size_t j = 0; j < img.cols; ++j) {
+			if(zeroIsBackground) {
+				if(bestLabels.at<int>(cv::Point(0, i*img.cols + j)) == 0)
+					img.at<uchar>(cv::Point(j, i)) = 255;
+				else
+					img.at<uchar>(cv::Point(j, i)) = 0;
+			}
+			else {
+				if(bestLabels.at<int>(cv::Point(0, i*img.cols + j)) == 1)
+					img.at<uchar>(cv::Point(j, i)) = 255;				
+				else
+					img.at<uchar>(cv::Point(j, i)) = 0;
+			}
+		}
 	}
 
 	cv::imshow("New image", img);

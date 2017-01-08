@@ -16,3 +16,9 @@ TARGET_LINK_LIBRARIES( kmeans ${OpenCV_LIBS} )
 
 ADD_EXECUTABLE( kmeans_hue_value kmeans_hue_value.cpp )
 TARGET_LINK_LIBRARIES( kmeans_hue_value ${OpenCV_LIBS} )
+
+ADD_EXECUTABLE( new_kmeans new_kmeans.cpp )
+TARGET_LINK_LIBRARIES( new_kmeans ${OpenCV_LIBS} )
+
+ADD_EXECUTABLE( kmeans_test kmeans_test.cpp )
+TARGET_LINK_LIBRARIES( kmeans_test ${OpenCV_LIBS} )
